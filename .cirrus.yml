@@ -353,11 +353,10 @@ docker_images_builder:
     DOCKER_USERNAME: ENCRYPTED[90ac3ca3c9ca993d2af7f1a01e688d2bbfb5fa9484d5416f0b86d19a2b1348f642e9e66c017f3bad55f8f3918970a906]
     DOCKER_PASSWORD: ENCRYPTED[6b4ad5ad33317034f90122a5d732f1953e13ef37b34f033cb021acae0f12835f3366f5008c36e3731e7a4b102972f0b8]
 
-  build_script:
-    matrix:
-      - make -C docker build-alpine-3.11
-      - make -C docker build-centos-8
-      - make -C docker build-ubuntu-19.10
+  matrix:
+    - build_script: make -C docker build-alpine-3.11
+    - build_script: make -C docker build-centos-8
+    - build_script: make -C docker build-ubuntu-19.10
   login_script:
     - docker login --username "$DOCKER_USERNAME" --password "$DOCKER_PASSWORD"
   publish_script: |
