@@ -337,3 +337,31 @@ docker_centos_8_task:
   packages_artifacts:
     path: build/spicy-*.tar.gz
     type: application/gzip
+
+docker_images_builder:
+  # Make this depend on all required tasks.
+  # depends_on:
+  #   - docker_alpine_3_11_task
+  #   - ...
+
+  # Trigger only for tags.
+  # only_if: $CIRRUS_TAG != ''
+
+  env:
+    # DOCKER_USERNAME: ENCRYPTED[054c0f25f9f6a6ed6720c9d8d11e1a5fc6d12dbf2c99860cd6c938528b13d29e545d06462c9775a3cbd5fc9ea7ae9f53]
+    # DOCKER_PASSWORD: ENCRYPTED[ffe56ca425d6964e2d1361241433aa4ce4f9c55f757fb26a2aa9994c7880a7fc6c010286c091e7e115390f64ccedec5b]
+    DOCKER_USERNAME: ENCRYPTED[90ac3ca3c9ca993d2af7f1a01e688d2bbfb5fa9484d5416f0b86d19a2b1348f642e9e66c017f3bad55f8f3918970a906]
+    DOCKER_PASSWORD: ENCRYPTED[6b4ad5ad33317034f90122a5d732f1953e13ef37b34f033cb021acae0f12835f3366f5008c36e3731e7a4b102972f0b8]
+
+  build_script:
+    matrix:
+      - make -C docker build-alpine-3.11
+      - make -C docker build-centos-8
+      - make -C docker build-ubuntu-19.10
+  login_script:
+    - docker login --username "$DOCKER_USERNAME" --password "$DOCKER_PASSWORD"
+  publish_script: |
+    for image in $(docker images --filter=reference='spicy*:*' --format '{{.Repository}}:{{.Tag}}'); do
+      docker tag "$image" "zeek/$image";
+      docker push "bbannier/$image";
+    done
