@@ -338,7 +338,7 @@ docker_centos_8_task:
     path: build/spicy-*.tar.gz
     type: application/gzip
 
-docker_images_builder:
+docker_builder:
   # Make this depend on all required tasks.
   # depends_on:
   #   - docker_alpine_3_11_task
