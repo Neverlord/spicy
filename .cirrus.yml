@@ -339,6 +339,7 @@ docker_centos_8_task:
     type: application/gzip
 
 docker_builder:
+  name: Publish images
   # Make this depend on all required tasks.
   # depends_on:
   #   - docker_alpine_3_11_task
