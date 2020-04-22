@@ -375,6 +375,6 @@ docker_builder:
     - docker login --username "$DOCKER_USERNAME" --password "$DOCKER_PASSWORD"
   publish_script: |
     for image in $(docker images --filter=reference='spicy*:*' --format '{{.Repository}}:{{.Tag}}'); do
-      docker tag "$image" "zeek/$image";
-      docker push "bbannier/$image";
+      docker tag "$image" "zeekurity/$image";
+      docker push "zeekurity/$image";
     done
