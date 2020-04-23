@@ -24,7 +24,7 @@ case "${cmd}" in
         # match our Dockerfile, we might still be able to reused some cached layers.
         docker pull "zeekurity/spicy-base-${platform}:${version}" || true
 
-        DOCKER_BUILDKIT=1 docker build -t "spicy-base-${platform}:${version}" -f "Dockerfile.${platform}" .. || exit 1
+        DOCKER_BUILDKIT=1 docker build -t "spicy-base-${platform}:${version}" --cache-from "zeekurity/spicy-base-${platform}:${version}" -f "Dockerfile.${platform}" .. || exit 1
         docker tag "$(docker inspect --format='{{.Id}}' "spicy-base-${platform}:${version}")" "spicy-${platform}:latest"
 
         IMG=spicy-build-$RANDOM
