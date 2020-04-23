@@ -239,7 +239,7 @@ docker_ubuntu_19_10_task:
     cpu: 8
     memory: 16G
     docker_arguments:
-      - SKIP_BUILD=1
+      - SKIP_BUILD: 1
 
   timeout_in: 120m
 
@@ -279,7 +279,7 @@ docker_alpine_3_11_task:
     cpu: 8
     memory: 16G
     docker_arguments:
-      - SKIP_BUILD=1
+      - SKIP_BUILD: 1
 
   timeout_in: 120m
 
@@ -319,7 +319,7 @@ docker_centos_8_task:
     cpu: 8
     memory: 16G
     docker_arguments:
-      - SKIP_BUILD=1
+      - SKIP_BUILD: 1
 
   timeout_in: 120m
 
