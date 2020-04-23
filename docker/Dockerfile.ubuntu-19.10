@@ -30,3 +30,6 @@ RUN curl -L https://github.com/Kitware/CMake/releases/download/v3.15.0/cmake-3.1
 ENV PATH="/usr/local/cmake/bin:${PATH}"
 
 WORKDIR /root
+
+# Install Spicy.
+ADD . /opt/spicy/src

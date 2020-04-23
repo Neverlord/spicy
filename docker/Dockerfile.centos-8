@@ -40,3 +40,8 @@ RUN yum install -y libpcap-devel openssl-devel python3-devel swig zlib-devel
 RUN cd /etc/yum.repos.d \
  && curl -L 'https://download.opensuse.org/repositories/security:zeek/CentOS_8/security:zeek.repo' > zeek.repo \
  && yum install -y zeek-lts zeek-lts-devel
+
+WORKDIR /root
+
+# Install Spicy.
+ADD . /opt/spicy/src
